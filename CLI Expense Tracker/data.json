@@ -1,0 +1,27 @@
+{
+    "Balance_Budget": -1300,
+    "expenses": [
+        {
+            "date": "03/02/2026",
+            "date_format": {
+                "Day": "03",
+                "Month": "02",
+                "Year": "2026"
+            },
+            "amount": " 300",
+            "category": " groceries",
+            "payment": " cash"
+        },
+        {
+            "date": "04/05/2026",
+            "date_format": {
+                "Day": "04",
+                "Month": "05",
+                "Year": "2026"
+            },
+            "amount": " 4000",
+            "category": " personal",
+            "payment": " online"
+        }
+    ]
+}
