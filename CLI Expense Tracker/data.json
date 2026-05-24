@@ -1,27 +1,60 @@
 {
-    "Balance_Budget": -1300,
+    "Balance_Budget": 2600,
     "expenses": [
         {
-            "date": "03/02/2026",
+            "date": "25-4-2026",
             "date_format": {
-                "Day": "03",
-                "Month": "02",
+                "Day": "25",
+                "Month": "4",
                 "Year": "2026"
             },
-            "amount": " 300",
-            "category": " groceries",
-            "payment": " cash"
+            "amount": "30",
+            "category": "Groceries",
+            "payment": "UPI"
         },
         {
-            "date": "04/05/2026",
+            "date": "27-4-2026",
             "date_format": {
-                "Day": "04",
-                "Month": "05",
+                "Day": "27",
+                "Month": "4",
                 "Year": "2026"
             },
-            "amount": " 4000",
-            "category": " personal",
-            "payment": " online"
+            "amount": "40",
+            "category": "Food",
+            "payment": "CASH"
+        },
+        {
+            "date": "10-5-2026",
+            "date_format": {
+                "Day": "10",
+                "Month": "5",
+                "Year": "2026"
+            },
+            "amount": "80",
+            "category": "Transport",
+            "payment": "CARD"
+        },
+        {
+            "date": "12-5-2026",
+            "date_format": {
+                "Day": "12",
+                "Month": "5",
+                "Year": "2026"
+            },
+            "amount": "20",
+            "category": "Personal",
+            "payment": "CASH"
+        },
+        {
+            "date": "1-5-2026",
+            "date_format": {
+                "Day": "1",
+                "Month": "5",
+                "Year": "2026"
+            },
+            "amount": "300",
+            "category": "Personal",
+            "payment": "NET BANKING"
         }
     ]
 }

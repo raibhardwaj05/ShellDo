@@ -1,8 +1,9 @@
 from prettytable import PrettyTable
-from budget import total_budget
-import json
-
-# date = "", amount = 0, catego = "", payment
+from load_data import load
+from store_data import store
+from filter import filter_expense
+import questionary
+import calendar
 
 # create table
 expense_table = PrettyTable()
@@ -15,77 +16,114 @@ count = 1
 # temporary storage list
 expense_records = []
 
-# load data
-with open("data.json", "r") as records:
-    data = json.load(records)
+# category choices
+category_list = ["Groceries", "Medical", "Personal", "Transport", "Food", "Bills", "Shopping", "Entertainment", "Other"]
 
-
-# if no data is there in the PrettyTable or storage get the budget input as it is set once
-if not data["expenses"] and data["Balance_Budget"] == 0:
-    balance = int(input("Your monthy Budget: $"))
-    data["Balance_Budget"] = balance
-else:
-    # reflect data into table
-    balance = data["Balance_Budget"]
-
-    for items in data["expenses"]:
-        date = items["date"]
-        amount = items["amount"]
-        category = items["category"]
-        payment = items["payment"]
-
-        expense_table.add_row([count, date, amount, category, payment])
-        count = count + 1
+expense_table, data, balance, count = load(expense_table, count)
 
 print("Balance: ", balance)
 print(expense_table)
 
 while(1):
-    cmd = input("enter command: (date (DD/MM/YYYY), expense, category, payment mode) or 'exit' to get out of this!\n").lower().strip()
+    if balance < 0:
+        print("Your Expenses are already Over Budget\n(Do you want to still make more expenses?)\nIF NO TYPE 'EXIT'")
 
-    if cmd == "exit":
+    print()
+
+    expense_OR_exit_OR_filter = input("enter : expense amount or 'filter' dates or 'analyse' expense or 'exit' to get out of this!\n").lower().strip()
+
+    print()
+
+    if expense_OR_exit_OR_filter not in {"analyse", "filter", "exit"}:
+        try:
+            amt = int(expense_OR_exit_OR_filter)
+            if amt <= 0: 
+                print("INVALD INPUT")
+                print()
+                continue
+            
+        except ValueError:
+            print("INVALID INPUT")
+            continue
+
+    if expense_OR_exit_OR_filter == "exit":
         print("Balance: ", balance)
         print(expense_table)
         break
 
-    try:
-        expense_records = cmd.split(",")
-        date = expense_records[0]
+    elif expense_OR_exit_OR_filter == "filter": 
+        filter_expense(data, category_list)
 
-        date_split = expense_records[0].split("/")
-        date_format = {
-            "Day": date_split[0],
-            "Month": date_split[1],
-            "Year": date_split[2]
-        }
-        amount = expense_records[1]
-        category = expense_records[2]
-        payment = expense_records[3]
-
-        new_expense = {
-            "date": date,
-            "date_format": date_format,
-            "amount": amount,
-            "category": category,
-            "payment": payment
-        }
-        
-        # fill table row with new data
-        expense_table.add_row([str(count), new_expense["date"], new_expense["amount"], new_expense["category"], new_expense["payment"]])
-        count = count + 1
-
-        # update with new records
-        balance = total_budget(balance, int(new_expense["amount"]))
-        data["Balance_Budget"] = balance
-        data["expenses"].append(new_expense)
-
-        # store data in json
-        with open("data.json", "w") as records:
-            json.dump(data, records, indent= 4) # indent is spacing for readability
+    elif expense_OR_exit_OR_filter == "analyse":
+        pass
     
-    except IndexError:
-        print("Please enter data in valid format")
+    else:
 
+        # category of expense
+        category_choice = questionary.select(
+            "Choose Category: ",
+            choices= category_list
+        ).ask()
 
+        print()
 
+        # payment mode
+        payment_choice = questionary.select(
+            "Payment Mode: ",
+            choices= ["UPI", "CARD", "NET BANKING", "CASH"]
+        ).ask()
 
+        print()
+        
+        # expense date
+
+        # valid month
+        while True: 
+            try: 
+                month = input("Enter month (MM): ")
+
+                if not month.isdigit():
+                    print("INVALID MONTH")
+                    continue
+
+                month = int(month)
+
+                if month < 1 or month > 12:
+                    print("INVALID MONTH")
+                    continue
+
+                break
+            
+            except ValueError:
+                print("INVALID MONTH")
+
+        # valid year
+        while True: 
+            try: 
+                year = input("Enter year (YYYY): ")
+
+                if not year.isdigit() or len(year) != 4:
+                    print("INVALID YEAR")
+                    continue
+
+                year = int(year)
+
+                break
+            
+            except ValueError:
+                print("INVALID YEAR")
+
+        # valid days in the month => (first day of the month, total days)(0 to 6 =>> monday to sunday)
+        no_of_days = calendar.monthrange(year, month)[1]
+
+        days = [str(day) for day in range(1, no_of_days + 1)]
+
+        day = questionary.select(
+            "DATE: ",
+            choices= days
+        ).ask()
+
+        print()
+
+        balance = store(count, expense_table, expense_OR_exit_OR_filter, str(day), str(month), str(year), category_choice, payment_choice, balance, data)
+        
