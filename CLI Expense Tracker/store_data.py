@@ -1,5 +1,5 @@
 import json
-from budget import total_budget
+from helper_fun import total_budget
 
 def store(count, expense_table, expense_amount, day, month, year, category_choice, payment_choice, balance, data):
     

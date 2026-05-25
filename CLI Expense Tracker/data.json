@@ -1,5 +1,5 @@
 {
-    "Balance_Budget": 2600,
+    "Balance_Budget": 2500,
     "expenses": [
         {
             "date": "25-4-2026",
@@ -54,6 +54,17 @@
             },
             "amount": "300",
             "category": "Personal",
+            "payment": "NET BANKING"
+        },
+        {
+            "date": "25-5-2026",
+            "date_format": {
+                "Day": "25",
+                "Month": "5",
+                "Year": "2026"
+            },
+            "amount": "100",
+            "category": "Groceries",
             "payment": "NET BANKING"
         }
     ]
