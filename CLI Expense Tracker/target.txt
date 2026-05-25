@@ -1,8 +1,0 @@
-Analyse Expense
-
-1. analyse based on category in a given date range
-2. based on payment mode in given a date range
-
-what needs to be done 
-
-1. aggregate all the expense based on category/payment mode in the given range
