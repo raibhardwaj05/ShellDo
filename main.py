@@ -1,11 +1,11 @@
 from prettytable import PrettyTable
-import secrets # better than random for unique ids
 import string
-import questionary
 from helper_functions import month_year
+from add import add_task
+from load_data import load
 
 todo = PrettyTable()
-todo.field_names = ["TaskID", "Task", "Category", "Deadline", "Completed?"]
+todo.field_names = ["TaskID", "Task", "Category", "Deadline", "Priority"]
 todo.align = "c"
 
 chars = string.ascii_lowercase + string.digits
@@ -18,28 +18,30 @@ categories = [
     "Others"
 ]
 
+todo, data = load(todo)
+
+print(todo)
+
 while True:
+    print()
+    cmd = input("Enter:\n'add' to create new task\n'read' to read todo list\n'update' to update existing task\n'completed' to mark as completed\n").lower().strip()
+    print()
 
-    # generates 5 random chars one by one and then .join joins them
-    task_id = "".join(secrets.choice(chars) for _ in range(5)) # '_' ==> doesn't care about the variable
-
-    task = input("Enter the Task you want to add or 'exit' to get out of this\n").lower()
-
-    if task.strip() == 'exit':
-        print(todo)
-        break
-    
-    if len(task.strip()) <= 2:
-        print("add task with names greater than 2 characters!")
+    if cmd not in {'add', 'read', 'update', 'completed', 'exit'}:
+        print("INVALID INPUT!")
         continue
+    
+    if cmd == 'add':
+        add_task(todo, data, chars, categories)
 
-    category_choice = questionary.select(
-        "Choose Category: ",
-        choices= categories
-    ).ask()
+    elif cmd == 'read':
+        print(todo)
 
-    print("---------------------------------Enter Deadline---------------------------------")
+    elif cmd == 'update':
+        pass
 
-    date, month, year = month_year()
+    elif cmd == 'completed':
+        pass
 
-    print(str(date)+ "-" +str(month) + "-" + str(year))
+    else:
+        break

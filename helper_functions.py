@@ -1,11 +1,12 @@
 import calendar
 from prettytable import PrettyTable
+from datetime import date
 
 monthly_calender = PrettyTable()
 monthly_calender.field_names = ["Mon", "Tue", "Wed", "Thrus", "Fri", "Sat", "Sun"]
 monthly_calender.align = "c"
 
-def month_year():
+def month_year(current_datetime):
     while True:
         month = input("Month (MM): ")
 
@@ -22,20 +23,7 @@ def month_year():
             print("Invalid Input!")
 
     
-    while True:
-        year = input("Year (YYYY): ")
-
-        try:
-            if len(year) != 4:
-                print("Invalid Input!")
-                continue
-
-            year = int(year)
-
-            break
-
-        except ValueError:
-            print("Invalid Input!")
+    year = current_datetime.year
 
 
     dates = calendar.monthcalendar(year, month)
@@ -57,10 +45,17 @@ def month_year():
     
     while True:
         try:
-            date = int(input("Enter Date: "))
+            day = int(input("Enter Date: "))
 
-            if date not in days:
+            if day not in days:
                 print("Invalid Input!")
+                continue
+            
+            check_date = date(year, month, day)
+            print(check_date)
+
+            if check_date < current_datetime:
+                print("INVALID INPUT! ")
                 continue
 
             break
@@ -68,4 +63,4 @@ def month_year():
         except ValueError:
             print("Invalid Input!")
 
-    return date, month, year
+    return check_date

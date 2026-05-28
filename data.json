@@ -1,0 +1,32 @@
+{
+    "todo_tasks": [
+        {
+            "task_id": "9taeo",
+            "task": "writing",
+            "category": "Personal",
+            "deadline": "2026-05-29",
+            "priority": 1
+        },
+        {
+            "task_id": "ce06l",
+            "task": "reading",
+            "category": "Personal",
+            "deadline": "2026-05-29",
+            "priority": 1
+        },
+        {
+            "task_id": "g72qe",
+            "task": "learning",
+            "category": "Personal",
+            "deadline": "2026-05-29",
+            "priority": 2
+        },
+        {
+            "task_id": "upu6z",
+            "task": "code",
+            "category": "Work",
+            "deadline": "2026-05-28",
+            "priority": 1
+        }
+    ]
+}
