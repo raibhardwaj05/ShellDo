@@ -1,6 +1,5 @@
 from helper_functions import month_year, filter_fun
 from datetime import datetime, date
-from prettytable import PrettyTable
 import questionary
 from load_data import load
 import json
@@ -10,7 +9,6 @@ def update_task(todo, data, categories):
 
     current_date = date.today()
 
-
     filter_by = input("Filter task by 'date' / 'category' you want to update\n").strip().lower()
 
     print()
@@ -19,9 +17,21 @@ def update_task(todo, data, categories):
         print("invalid input!")
         return todo, data 
     
-    id_list, tasks, to_update = filter_fun(filter_by, current_date, data, categories)
+    id_list = filter_fun(filter_by, current_date, data, categories)
 
-# ------------------------------------------new values-----------------------------------
+    #  ---------------------------------------get the field to be updated----------------------------------------
+
+    while True:
+        to_update = input("What you want to update?\n('task' / 'category' / 'deadline' / 'priority' / 'exit' to abort updation)\n").strip().lower()
+        print()
+
+        if to_update not in {"task", "category", "deadline", "priority", "exit"}:
+            print("invalid input!")
+            continue
+        else:
+            break
+
+    # ------------------------------------------new values-----------------------------------
     
     if to_update == "task":
         new_value = input("Enter the task replacement: ")
@@ -59,7 +69,6 @@ def update_task(todo, data, categories):
 #  ---------------------------------clear the variables and return the data----------------------------------------
 
     todo.clear_rows()
-    tasks.clear()
 
     todo, data = load(todo)
 

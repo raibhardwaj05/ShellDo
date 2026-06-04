@@ -82,38 +82,53 @@ def month_year(current_datetime):
 def filter_fun(filter_by, current_date, data, categories):
     tasks = []
     id_list = []
+
     #  ---------------------------------------filter-by date----------------------------------------
+    while True: 
+        if filter_by == 'date':
 
-    if filter_by == 'date':
-        task_on_date = month_year(current_date)
+            deadline_day = questionary.select(
+                "Select the Deadline: ",
+                choices= ["Today", "Some Other Day"]
+            ).ask()
 
-        task_on_date_format = datetime.strftime(task_on_date, "%Y-%m-%d")
+            if deadline_day != "Today": 
+                task_on_date = month_year(current_date)
 
-        for items in data["todo_tasks"]:
-            if task_on_date_format == items["deadline"]:
-                tasks.append(items.values())
+                task_on_date_format = datetime.strftime(task_on_date, "%Y-%m-%d")
+            else:
+                task_on_date_format = datetime.strftime(current_date, "%Y-%m-%d")
 
-    #  ---------------------------------------filter-by category----------------------------------------
+            for items in data["todo_tasks"]:
+                if task_on_date_format == items["deadline"]:
+                    tasks.append(items.values())
 
-    if filter_by == 'category':
-        category_choice = questionary.select(
-            "Choose Category: ",
-            choices= categories
-        ).ask()
-    
-        for items in data["todo_tasks"]:
-            if category_choice == items["category"]:
-                tasks.append(items.values())
+        #  ---------------------------------------filter-by category----------------------------------------
 
-    if tasks:
-        list_task.add_rows(tasks)
-        print(list_task)
+        if filter_by == 'category':
+            category_choice = questionary.select(
+                "Choose Category: ",
+                choices= categories
+            ).ask()
+        
+            for items in data["todo_tasks"]:
+                if category_choice == items["category"]:
+                    tasks.append(items.values())
+
+        if not tasks:
+            print("no task matched!")
+            continue
+
+        if tasks:
+            list_task.add_rows(tasks)
+            print(list_task)
+            break
 
     #  ---------------------------------------get the id to be updated----------------------------------------
 
     while True:
 
-        id_to_update = input("enter task_id to update that task: ")
+        id_to_update = input("enter task_id of that task: ")
 
         if any(item.get("task_id") == id_to_update for item in data["todo_tasks"]):
             id_list.append(id_to_update)
@@ -136,18 +151,6 @@ def filter_fun(filter_by, current_date, data, categories):
             print("invalid input!")
             continue
 
-    #  ---------------------------------------get the field to be updated----------------------------------------
-
-    while True:
-        to_update = input("What you want to update?\n('task' / 'category' / 'deadline' / 'priority' / 'exit' to abort updation)\n").strip().lower()
-        print()
-
-        if to_update not in {"task", "category", "deadline", "priority", "exit"}:
-            print("invalid input!")
-            continue
-        else:
-            break
-
     list_task.clear_rows()
 
-    return id_list, tasks, to_update
+    return id_list

@@ -1,6 +1,6 @@
 from prettytable import PrettyTable
 import string
-from helper_functions import month_year
+from delete import delete_task
 from add import add_task
 from update import update_task
 from load_data import load
@@ -34,18 +34,27 @@ while True:
     
     if cmd == 'add':
         add_task(todo, data, chars, categories)
+        print()
+        print("Task Added Successfully!!\n")
 
     elif cmd == 'read':
         print(todo)
+        print()
 
     elif cmd == 'update':
         todo, data = update_task(todo, data, categories)
+        print()
+        print("Task Updated Successfully!!\n")
 
     elif cmd == 'delete':
-        pass
+        todo, data = delete_task(todo, data, categories)
+        print()
+        print("Task Deleted Successfully!!\n")
 
     elif cmd == 'completed':
-        pass
+        todo, data = delete_task(todo, data, categories)
+        print()
+        print("Whoa!! Congratulations\nYou Completed a Task!!\n")
 
     else:
         break

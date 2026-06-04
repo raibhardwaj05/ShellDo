@@ -16,24 +16,10 @@
         },
         {
             "task_id": "g72qe",
-            "task": "learning",
-            "category": "Personal",
+            "task": "solve atleast 2 dsa problems",
+            "category": "Work",
             "deadline": "2026-06-06",
             "priority": 2
-        },
-        {
-            "task_id": "upu6z",
-            "task": "code",
-            "category": "Work",
-            "deadline": "2026-05-28",
-            "priority": 1
-        },
-        {
-            "task_id": "qgrr3",
-            "task": "complete shelldo",
-            "category": "Work",
-            "deadline": "2026-06-04",
-            "priority": 1
         },
         {
             "task_id": "a409l",
@@ -44,14 +30,7 @@
         },
         {
             "task_id": "sij0v",
-            "task": "do running",
-            "category": "Health",
-            "deadline": "2026-06-06",
-            "priority": 1
-        },
-        {
-            "task_id": "ndnvz",
-            "task": "workout",
+            "task": "brisk walking",
             "category": "Health",
             "deadline": "2026-06-06",
             "priority": 1
