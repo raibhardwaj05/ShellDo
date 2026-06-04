@@ -16,6 +16,9 @@ def month_year(current_datetime):
             if month < 1 or month > 12:
                 print("Invalid Input!")
                 continue
+            elif month < current_datetime.month:
+                print("Invalid Input!")
+                continue
 
             break
 
@@ -30,9 +33,10 @@ def month_year(current_datetime):
     date_rows = len(dates)
     date_cols = len(dates[0])
 
-    for j in range(date_cols):
-        if dates[0][j] == 0:
-            dates[0][j] = ""
+    for i in range(date_rows):
+        for j in range(date_cols):
+            if dates[i][j] == 0:
+                dates[i][j] = ""
 
     for i in range(date_rows):
         monthly_calender.add_row(dates[i])

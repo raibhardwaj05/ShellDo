@@ -27,6 +27,20 @@
             "category": "Work",
             "deadline": "2026-05-28",
             "priority": 1
+        },
+        {
+            "task_id": "qgrr3",
+            "task": "complete shelldo",
+            "category": "Work",
+            "deadline": "2026-06-04",
+            "priority": 1
+        },
+        {
+            "task_id": "a409l",
+            "task": "walking",
+            "category": "Health",
+            "deadline": "2026-06-10",
+            "priority": 1
         }
     ]
 }
