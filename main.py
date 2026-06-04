@@ -41,6 +41,9 @@ while True:
     elif cmd == 'update':
         todo, data = update_task(todo, data, categories)
 
+    elif cmd == 'delete':
+        pass
+
     elif cmd == 'completed':
         pass
 

@@ -14,17 +14,21 @@ def add_task(todo_table, data, chars, categories):
     priority = 1
     same_day = []
 
+#  --------------------------------------------get the task----------------------------------------
+
     # generates 5 random chars one by one and then .join joins them
     task_id = "".join(secrets.choice(chars) for _ in range(5)) # '_' ==> doesn't care about the variable
 
     while True:
         task = input("Enter the task to do: ").lower().strip()
 
-        if len(task) <= 3:
-            print("add task with names greater than 3 characters!")
+        if len(task) <= 2:
+            print("add task with names greater than 2 characters!")
             continue
 
         break
+
+#  ---------------------------------------select category and deadline----------------------------------------
 
     category_choice = questionary.select(
         "Choose Category: ",
@@ -42,7 +46,16 @@ def add_task(todo_table, data, chars, categories):
     print(current_datetime)
 
     if deadline_day != "Today":
-        last_date = month_year(current_datetime)
+
+        while True:
+            last_date = month_year(current_datetime)
+
+            if last_date < current_datetime:
+                print("INVALID INPUT! ")
+                continue
+
+            break
+            
 
         deadline = datetime.strftime(last_date, "%Y-%m-%d")
 
@@ -58,6 +71,9 @@ def add_task(todo_table, data, chars, categories):
         deadline = datetime.strftime(current_datetime, "%Y-%m-%d")
     
     print()
+
+# --------------------------------------get the priority of the task---------------------------------
+
     while True:
         try:
             priority = int(input("Priority of this task (1 = highest, 10 = lowest): "))
@@ -65,6 +81,8 @@ def add_task(todo_table, data, chars, categories):
             break
         except ValueError:
             print("INVALID INPUT!")
+
+#  ---------------------------------clear the variables and store the data----------------------------------------
 
     todo_same_day.clear()
 

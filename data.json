@@ -3,22 +3,22 @@
         {
             "task_id": "9taeo",
             "task": "writing",
-            "category": "Personal",
-            "deadline": "2026-05-29",
+            "category": "Work",
+            "deadline": "2026-06-07",
             "priority": 1
         },
         {
             "task_id": "ce06l",
             "task": "reading",
             "category": "Personal",
-            "deadline": "2026-05-29",
+            "deadline": "2026-06-15",
             "priority": 1
         },
         {
             "task_id": "g72qe",
             "task": "learning",
             "category": "Personal",
-            "deadline": "2026-05-29",
+            "deadline": "2026-06-06",
             "priority": 2
         },
         {
@@ -40,6 +40,20 @@
             "task": "walking",
             "category": "Health",
             "deadline": "2026-06-10",
+            "priority": 1
+        },
+        {
+            "task_id": "sij0v",
+            "task": "do running",
+            "category": "Health",
+            "deadline": "2026-06-06",
+            "priority": 1
+        },
+        {
+            "task_id": "ndnvz",
+            "task": "workout",
+            "category": "Health",
+            "deadline": "2026-06-06",
             "priority": 1
         }
     ]
