@@ -1,0 +1,2 @@
+prettytable==3.17.0
+questionary==2.1.1
